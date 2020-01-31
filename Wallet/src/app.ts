@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import createError from 'http-errors';
 import { HttpErrorDto } from './dto/httpError.dto';
@@ -6,7 +6,7 @@ import indexRouter from './routes';
 import './utils/auth/passportJWT';
 import './utils/auth/passportLocal';
 
-const app = express();
+const app: Application = express();
 
 app.use(passport.initialize());
 

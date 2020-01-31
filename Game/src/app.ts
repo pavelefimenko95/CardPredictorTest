@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
@@ -9,7 +9,7 @@ import indexRouter from './routes/index';
 import config from '../config';
 import './utils/auth/passportLocal';
 
-const app = express();
+const app: Application = express();
 
 app.use(cors({origin: '*'}));
 
