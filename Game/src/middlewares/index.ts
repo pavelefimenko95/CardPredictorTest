@@ -5,6 +5,8 @@ import axios from 'axios';
 import sequelize from '../models';
 import { generateCard, isUserWon } from '../utils/generateCard';
 import config from '../../config';
+import { StartGameDto } from '../dto/startGame.dto';
+import { EndGameDto } from '../dto/endGame.dto';
 
 const Round = sequelize.models.Round;
 
@@ -27,6 +29,8 @@ export const authenticate = async (req: any, res: Response, next: NextFunction) 
 
 export const startGame = async (req: any, res: Response, next: NextFunction) => {
     try {
+        const body: StartGameDto = req.body;
+
         const round = await Round.findOne({
             where: {
                 username: req.user.name
@@ -41,7 +45,7 @@ export const startGame = async (req: any, res: Response, next: NextFunction) => 
             const round: any = await Round.create({
                 username: req.user.name,
                 card: generateCard(),
-                betAmount: req.body.betAmount
+                betAmount: body.betAmount
             });
 
             res.send({
@@ -56,6 +60,8 @@ export const startGame = async (req: any, res: Response, next: NextFunction) => 
 
 export const endGame = async (req: any, res: Response, next: NextFunction) => {
     try {
+        const body: EndGameDto = req.body;
+
         const round: any = await Round.findOne({
             where: {
                 username: req.user.name
@@ -75,7 +81,7 @@ export const endGame = async (req: any, res: Response, next: NextFunction) => {
             });
 
             const nextCard = generateCard();
-            const isWon = isUserWon(round.card, nextCard, req.body.prediction);
+            const isWon = isUserWon(round.card, nextCard, body.prediction);
 
             await Round.destroy({
                 where: {
