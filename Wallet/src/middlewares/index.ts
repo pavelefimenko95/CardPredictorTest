@@ -3,6 +3,8 @@ import createError from 'http-errors';
 import bcrypt from 'bcrypt';
 import sequelize from '../models';
 import config from '../../config';
+import { WithdrawDto } from '../dto/withdraw.dto';
+import { DepositDto } from '../dto/deposit.dto';
 import signToken from '../utils/auth/signToken';
 
 const User = sequelize.models.User;
@@ -52,7 +54,8 @@ export const verifyToken = async (req: any, res: Response, next: NextFunction) =
 
 export const withdraw = async (req: any, res: Response, next: NextFunction) => {
     try {
-        const { amount, username, hash } = req.body;
+        const body: WithdrawDto = req.body;
+        const { amount, username, hash } = body;
 
         if(await bcrypt.compare(config.MICROSERVICE_SECRET, hash)) {
             const user: any = await User.findOne({
@@ -82,7 +85,8 @@ export const withdraw = async (req: any, res: Response, next: NextFunction) => {
 
 export const deposit = async (req: any, res: Response, next: NextFunction) => {
     try {
-        const { amount, username, hash } = req.body;
+        const body: DepositDto = req.body;
+        const { amount, username, hash } = body;
 
         if(await bcrypt.compare(config.MICROSERVICE_SECRET, hash)) {
             const user: any = await User.findOne({
