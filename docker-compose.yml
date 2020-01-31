@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  game:
+    container_name: GameServiceContainer
+    build: Game/
+    command: ['./bash/wait-for-it.sh', 'mysql:3306', '--', 'npm', 'start']
+    ports:
+      - '4000:4000'
+    links:
+      - mysql
+  wallet:
+    container_name: WalletServiceContainer
+    build: Wallet/
+    command: ['./bash/wait-for-it.sh', 'mysql:3306', '--', 'npm', 'start']
+    ports:
+      - '5000:5000'
+    links:
+      - mysql
+  mysql:
+    container_name: CardPredictorDbContainer
+    image: mysql
+    environment:
+      MYSQL_DATABASE: appDb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./MySQLData:/var/lib/mysql

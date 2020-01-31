@@ -1,0 +1,22 @@
+{
+  "name": "CardPredictorTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose down && docker-compose build --no-cache && docker-compose up",
+    "docker:clear:cache": "sudo docker system prune -a && sudo docker volume prune"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavelefimenko95/CardPredictorTest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavelefimenko95/CardPredictorTest/issues"
+  },
+  "homepage": "https://github.com/pavelefimenko95/CardPredictorTest#readme",
+  "dependencies": {}
+}
