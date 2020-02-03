@@ -8,5 +8,5 @@ export default {
         database: process.env.DATABASE || 'appDb'
     },
     JWT_SECRET: process.env.JWT_SECRET || 'zOaEvRCgMwQlZeTm',
-    MICROSERVICE_SECRET: process.env.MICROSERVICE_SECRET || 'MwFDQlZeMwFDQlZe'
+    MICROSERVICE_HASH: process.env.MICROSERVICE_HASH || '$2b$10$M9JSzCtdr27PAd.LgkKWL.ZNrjv9pb5NSCx4Tj/TJkoz6R2Ktya86'
 };

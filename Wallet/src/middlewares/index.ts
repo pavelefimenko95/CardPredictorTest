@@ -55,9 +55,9 @@ export const verifyToken = async (req: any, res: Response, next: NextFunction) =
 export const withdraw = async (req: any, res: Response, next: NextFunction) => {
     try {
         const body: WithdrawDto = req.body;
-        const { amount, username, hash } = body;
+        const { amount, username, secret } = body;
 
-        if(await bcrypt.compare(config.MICROSERVICE_SECRET, hash)) {
+        if(await bcrypt.compare(secret, config.MICROSERVICE_HASH)) {
             const user: any = await User.findOne({
                 where: {
                     name: username,
@@ -75,7 +75,7 @@ export const withdraw = async (req: any, res: Response, next: NextFunction) => {
             res.send();
         } else {
             throw createError(400, {
-                message: 'Invalid hash'
+                message: 'Invalid secret'
             });
         }
     } catch(e) {
@@ -86,9 +86,9 @@ export const withdraw = async (req: any, res: Response, next: NextFunction) => {
 export const deposit = async (req: any, res: Response, next: NextFunction) => {
     try {
         const body: DepositDto = req.body;
-        const { amount, username, hash } = body;
+        const { amount, username, secret } = body;
 
-        if(await bcrypt.compare(config.MICROSERVICE_SECRET, hash)) {
+        if(await bcrypt.compare(secret, config.MICROSERVICE_HASH)) {
             const user: any = await User.findOne({
                 where: {
                     name: username,
@@ -106,7 +106,7 @@ export const deposit = async (req: any, res: Response, next: NextFunction) => {
             res.send();
         } else {
             throw createError(400, {
-                message: 'Invalid hash'
+                message: 'Invalid secret'
             });
         }
     } catch(e) {

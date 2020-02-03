@@ -8,5 +8,5 @@ export class WithdrawDto {
     readonly username: string;
 
     @IsString()
-    readonly hash: string;
+    readonly secret: string;
 }

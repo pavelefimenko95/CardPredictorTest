@@ -8,5 +8,5 @@ export class DepositDto {
     readonly username: string;
 
     @IsString()
-    readonly hash: string;
+    readonly secret: string;
 }
